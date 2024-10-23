@@ -75,7 +75,7 @@ public abstract class PessoaJuridicaDAO<E, K> {
     }
     
     public static void atualizar(PessoaJuridica pessoa) throws SQLException{
-        String updatePessoa = "UPDATE dbo.pessoa" +
+        String updatePessoa = "UPDATE dbo.pessoa " +
             "SET nome = ?, logradouro = ?, cidade = ?, estado = ?, telefone = ?, email = ? " +
             "WHERE idpessoa = ?";
         String updateJuridica =
@@ -100,12 +100,12 @@ public abstract class PessoaJuridicaDAO<E, K> {
     public static void excluir(int idpessoa) throws SQLException{
         String deletePessoa = "DELETE FROM dbo.pessoa WHERE idpessoa = ?";
         String deleteJuridica = "DELETE FROM dbo.pessoa_juridica WHERE idpessoa = ?";
-        PreparedStatement stmtPessoa = ConectorBD.getPrepared(deletePessoa);
-        stmtPessoa.setInt(1, idpessoa);
-        stmtPessoa.executeUpdate();
         PreparedStatement stmtJuridica = ConectorBD.getPrepared(deleteJuridica);
         stmtJuridica.setInt(1, idpessoa);
         stmtJuridica.executeUpdate();
+        PreparedStatement stmtPessoa = ConectorBD.getPrepared(deletePessoa);
+        stmtPessoa.setInt(1, idpessoa);
+        stmtPessoa.executeUpdate();
         ConectorBD.close(stmtPessoa);
         ConectorBD.close(stmtJuridica);
     }

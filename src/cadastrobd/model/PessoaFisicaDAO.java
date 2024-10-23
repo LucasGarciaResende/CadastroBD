@@ -75,7 +75,7 @@ public abstract class PessoaFisicaDAO<E, K> {
     }
     
     public static void atualizar(PessoaFisica pessoa) throws SQLException{
-        String updatePessoa = "UPDATE dbo.pessoa" +
+        String updatePessoa = "UPDATE dbo.pessoa " +
             "SET nome = ?, logradouro = ?, cidade = ?, estado = ?, telefone = ?, email = ? " +
             "WHERE idpessoa = ?";
         String updateFisica =
@@ -100,12 +100,12 @@ public abstract class PessoaFisicaDAO<E, K> {
     public static void excluir(int idpessoa) throws SQLException{
         String deletePessoa = "DELETE FROM dbo.pessoa WHERE idpessoa = ?";
         String deleteFisica = "DELETE FROM dbo.pessoa_fisica WHERE idpessoa = ?";
-        PreparedStatement stmtPessoa = ConectorBD.getPrepared(deletePessoa);
-        stmtPessoa.setInt(1, idpessoa);
-        stmtPessoa.executeUpdate();
         PreparedStatement stmtFisica = ConectorBD.getPrepared(deleteFisica);
         stmtFisica.setInt(1, idpessoa);
         stmtFisica.executeUpdate();
+        PreparedStatement stmtPessoa = ConectorBD.getPrepared(deletePessoa);
+        stmtPessoa.setInt(1, idpessoa);
+        stmtPessoa.executeUpdate();
         ConectorBD.close(stmtPessoa);
         ConectorBD.close(stmtFisica);
     }
