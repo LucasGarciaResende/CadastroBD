@@ -230,14 +230,10 @@ public class CadastroBD{
                     escolha = input.nextLine();
                     switch(escolha){
                         case "F":
-                            for(PessoaFisica pessoa: PessoaFisicaDAO.getPessoas()){
-                                pessoa.exibir();
-                            }
+                            PessoaFisicaDAO.getPessoas().forEach(pessoa -> pessoa.exibir());
                             break;
                         case "J":
-                            for(PessoaJuridica pessoa: PessoaJuridicaDAO.getPessoas()){
-                                pessoa.exibir();
-                            }
+                            PessoaJuridicaDAO.getPessoas().forEach(pessoa -> pessoa.exibir());
                             break;
                         default:
                             System.out.println("Input Inválido");
